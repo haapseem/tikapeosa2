@@ -5,7 +5,9 @@
  */
 package com.sleepygeckos.tikape.handlers;
 
+import com.sleepygeckos.tikape.Food;
 import com.sleepygeckos.tikape.database.DbHandler;
+import java.sql.SQLException;
 
 /**
  *
@@ -17,12 +19,13 @@ public class FoodHandler extends ItemHandler {
         super("Food");
     }
     
-    public void generateRecipeLines() throws Exception {
+    public void generateRecipeLines() throws SQLException {
         DbHandler dh = new DbHandler();
         super.getItems().stream().forEach(x -> {
-            dh.getFoodRecipeLines(x.getId()).stream().foreach(y -> {
-                x.addRecipeLine(y);
-            });
+            try{
+            dh.getFoodRecipeLines(x.getId()).stream().forEach(y -> {
+                ((Food)x).addRecipeLine(y);
+            });}catch(Exception e){}
         });
     }
     
