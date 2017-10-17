@@ -1,5 +1,7 @@
 package com.sleepygeckos.tikape.database;
 
+import com.sleepygeckos.tikape.Food;
+import com.sleepygeckos.tikape.Ingredient;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -51,22 +53,23 @@ public class DbHandler {
     public List<Ingredient> getFoodIngredients(int foodId) throws SQLException {
         PreparedStatement statement = connection.prepareStatement("SELECT * FROM Ingredient INNER JOIN FoodIngredient ON Ingredient.id = FoodIngredient.ingredientId WHERE FoodIngredient.foodId = ?");
         statement.setInt(1, foodId);
-        
+
         ResultSet resultSet = statement.executeQuery();
         List<Ingredient> foundItems = new ArrayList<>();
-        
-        while(resultSet.next()) {
-            Ingredient ingredient = new Ingredient(resultSet.getInt("id"), resultSet.getString("name"));
-            foundItems.add(ingredient);
+
+        if (resultSet != null) {
+
+            while (resultSet.next()) {
+                Ingredient ingredient = new Ingredient(resultSet.getInt("id"), resultSet.getString("name"));
+                foundItems.add(ingredient);
+            }
         }
-        
+
         statement.close();
         resultSet.close();
-        
-        connection.close();
-        
+
         return foundItems;
-        
+
     }
 
 }
