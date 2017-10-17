@@ -6,6 +6,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import com.sleepygeckos.tikape.Item;
+import com.sleepygeckos.tikape.RecipeLine;
 
 /**
  *
@@ -50,26 +51,29 @@ public class DbHandler {
         return foundItems;
     }
 
-    public List<Ingredient> getFoodIngredients(int foodId) throws SQLException {
-        PreparedStatement statement = connection.prepareStatement("SELECT * FROM Ingredient INNER JOIN FoodIngredient ON Ingredient.id = FoodIngredient.ingredientId WHERE FoodIngredient.foodId = ?");
+    //Pro tip: This may be buggy
+    public List<RecipeLine> getFoodRecipeLines(int foodId) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM FoodIngredient\n"
+                + "  INNER JOIN Ingredient ON Ingredient.id = FoodIngredient.ingredientId\n"
+                + "  WHERE FoodIngredient.foodId = ?");
         statement.setInt(1, foodId);
 
         ResultSet resultSet = statement.executeQuery();
-        List<Ingredient> foundItems = new ArrayList<>();
+        List<RecipeLine> foundItems = new ArrayList<>();
 
-        if (resultSet != null) {
-
-            while (resultSet.next()) {
-                Ingredient ingredient = new Ingredient(resultSet.getInt("id"), resultSet.getString("name"));
-                foundItems.add(ingredient);
-            }
+        while (resultSet.next()) {
+            Ingredient ingredient = new Ingredient(foodId, resultSet.getString("name"));
+            String order = resultSet.getString("orderName");
+            String amount = resultSet.getString("amount");
+            String text = resultSet.getString("recipe");
+            RecipeLine recipeLine = new RecipeLine(ingredient, order, amount, text);
+            foundItems.add(recipeLine);
         }
 
         statement.close();
         resultSet.close();
-
+        
         return foundItems;
-
     }
 
     //Returns null if item not found
