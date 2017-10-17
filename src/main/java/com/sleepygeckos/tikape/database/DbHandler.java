@@ -72,4 +72,28 @@ public class DbHandler {
 
     }
 
+    //Returns null if item not found
+    public Item findItem(String tableName, int id) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM ? WHERE id = ?");
+        statement.setString(1, tableName);
+        statement.setInt(2, id);
+
+        ResultSet resultSet = statement.executeQuery();
+
+        if (resultSet.next()) {
+            String name = resultSet.getString("name");
+            //Toimiiko?
+            statement.close();
+            resultSet.close();
+
+            if (tableName.equals("Food")) {
+                return new Food(id, name);
+            } else if (tableName.equals("Ingredient")) {
+                return new Ingredient(id, name);
+            }
+        }
+
+        return null;
+    }
+
 }
