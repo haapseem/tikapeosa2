@@ -31,8 +31,7 @@ public class DbHandler {
      * depending on which table's name was given as parameter.
      */
     public List<Item> findAllItems(String tableName) throws SQLException {
-        PreparedStatement statement = connection.prepareStatement("SELECT * FROM ?");
-        statement.setString(1, tableName);
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM " + tableName);
 
         ResultSet resultSet = statement.executeQuery();
         List<Item> foundItems = new ArrayList<>();

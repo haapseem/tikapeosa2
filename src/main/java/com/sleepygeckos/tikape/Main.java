@@ -15,7 +15,6 @@ public class Main {
         DbHandler dbhandler = new DbHandler();
         FoodHandler foodHandler = new FoodHandler();
         
-        
         Spark.get("/", (req, res) -> {
             HashMap map = new HashMap<>();  
             map.put("foods", foodHandler.getItems());
