@@ -1,5 +1,7 @@
 package com.sleepygeckos.tikape.database;
 
+import com.sleepygeckos.tikape.Food;
+import com.sleepygeckos.tikape.Ingredient;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
