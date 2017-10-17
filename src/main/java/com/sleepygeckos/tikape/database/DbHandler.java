@@ -13,11 +13,20 @@ public class DbHandler {
 
     Connection connection;
 
-    public DbHandler() {
+    public DbHandler() throws SQLException {
         //Assuming db file is in the root folder
-        this.connection = DriverManager.getConnection("jdbc:sqlite:vuokraamo.db");
+        this.connection = DriverManager.getConnection("jdbc:sqlite:db.db");
     }
     
+    /**
+     * 
+     * @param tableName 
+     * @return List<Item>
+     * @throws SQLException
+     * 
+     * Returns a List of Items, which will be either Food or Ingredient objects
+     * depending on which table's name was given as parameter.
+     */
     public List<Item> findAllItems(String tableName) throws SQLException {
         PreparedStatement statement = connection.prepareStatement("SELECT * FROM ?");
         statement.setString(1, tableName);
@@ -29,7 +38,11 @@ public class DbHandler {
             int id = resultSet.getInt("id");
             String name = resultSet.getString("name");
             
-            foundItems.add(new Item(id, name));
+            if (tableName.equals("Food")) {
+                foundItems.add(new Food(id, name));
+            } else if (tableName.equals("Ingredient")) {
+                foundItems.add(new Ingredient(id, name));
+            }
         }
         
         return foundItems;
