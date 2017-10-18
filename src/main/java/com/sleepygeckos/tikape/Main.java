@@ -21,6 +21,12 @@ public class Main {
             return new ModelAndView(map, "index");
         }, new ThymeleafTemplateEngine());
         
+        Spark.get("/fdsa", (req, res) -> {
+            HashMap map = new HashMap<>();  
+            map.put("foods", foodHandler.getItems());
+            return new ModelAndView(map, "ingredients");
+        }, new ThymeleafTemplateEngine());
+        
         
         
         
