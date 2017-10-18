@@ -15,8 +15,8 @@ import java.sql.SQLException;
  */
 public class FoodHandler extends ItemHandler {
 
-    public FoodHandler() throws Exception{
-        super("Food");
+    public FoodHandler(DbHandler dh) throws Exception{
+        super("Food", dh);
     }
     
     public void generateRecipeLines() throws SQLException {

@@ -13,7 +13,7 @@ public class Main {
 
     public static void main(String[] args) throws SQLException, Exception {
         DbHandler dbhandler = new DbHandler();
-        FoodHandler foodHandler = new FoodHandler();
+        FoodHandler foodHandler = new FoodHandler(dbhandler);
         
         Spark.get("/", (req, res) -> {
             HashMap map = new HashMap<>();  

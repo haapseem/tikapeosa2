@@ -16,10 +16,11 @@ import java.util.List;
 public abstract class ItemHandler {
     
     private List<Item> items;
-
-    public ItemHandler(String table) throws Exception{
-        DbHandler dh = new DbHandler();
-        this.items = dh.findAllItems(table);
+    private DbHandler dh;
+    
+    public ItemHandler(String tableName, DbHandler dh) throws Exception{
+        this.dh = dh;
+        this.items = dh.findAllItems(tableName);
     }
 
     public List<Item> getItems() {

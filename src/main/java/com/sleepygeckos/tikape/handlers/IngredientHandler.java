@@ -5,8 +5,7 @@
  */
 package com.sleepygeckos.tikape.handlers;
 
-import com.sleepygeckos.tikape.Item;
-import java.util.List;
+import com.sleepygeckos.tikape.database.DbHandler;
 
 /**
  *
@@ -14,8 +13,8 @@ import java.util.List;
  */
 public class IngredientHandler extends ItemHandler{
 
-    public IngredientHandler() throws Exception{
-        super("Ingredient");
+    public IngredientHandler(DbHandler dh) throws Exception{
+        super("Ingredient", dh);
     }
     
 }
