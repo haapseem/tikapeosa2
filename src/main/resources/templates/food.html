@@ -12,19 +12,19 @@ and open the template in the editor.
     </head>
     <body>
         <h1 th:text="${food.name}">asdf</h1>
-        
-        <p><b>ainekset:</b></p>
+
+        <p><b>Ingredients:</b></p>
         <ul>
             <li th:each="line : ${lines}">
                 <b th:text="${line.amount}"></b>
                 <i th:text="${line.ingredient.name}"></i>
-                <blockquote th:text="@{order = {o}(o=${line.order})}"></blockquote>
             </li>
         </ul>
-        <p><b>ohje:</b></p>
+        <p><b>Instructions:</b></p>
         <ul>
             <li th:each="line : ${lines}">
-                <p th:text="${line.text}"></p>
+                <span th:text="@{ {o}: (o=${line.order})}"></span>
+                <span th:text="${line.text}"></span>
             </li>
         </ul>
     </body>
