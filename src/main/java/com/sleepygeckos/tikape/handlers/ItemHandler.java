@@ -26,6 +26,25 @@ public abstract class ItemHandler {
     public List<Item> getItems() {
         return items;
     }
+    
+    public Item getItem(int itemId) {
+        //This is where using a hashmap would be a good idea
+        for (Item item : items) {
+            if (item.getId() == itemId) {
+                return item;                
+            }
+        }
+        
+        return null;
+    }
+
+    public DbHandler getDh() {
+        return dh;
+    }
+
+    public void setDh(DbHandler dh) {
+        this.dh = dh;
+    }
 
     public void setItems(List<Item> items) {
         this.items = items;
