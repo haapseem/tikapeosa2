@@ -109,7 +109,7 @@ public class DbHandler {
             addFood.executeUpdate();
 
             addFood.close();
-        }
+}
 
         if (tableName.equals("Ingredient")) {
             PreparedStatement addIngredient = connection.prepareStatement("INSERT INTO Ingredient (name) VALUES (?)");
