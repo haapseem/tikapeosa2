@@ -83,9 +83,15 @@ public class Main {
         });
 
 // add an ingredient for a smoothie
-        Spark.post("/addIngredientForSmoothie/:id", (req, res) -> {
-//            foodtHandler.addIngredientForSmoothie(req.queryParams(""));
-
+        Spark.post("/addIngredientForSmoothie", (req, res) -> {
+            int x = Integer.parseInt(req.queryParams("smoothie"));
+            int y = Integer.parseInt(req.queryParams("ingredient"));
+            String a = req.queryParams("order");
+            String b = req.queryParams("amount");
+            String c = req.queryParams("recipe");
+            
+            foodHandler.addRecipeLine(x, y, a, c, b);
+            
             res.redirect("/");
             return "";
         });
