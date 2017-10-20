@@ -36,13 +36,45 @@ public class Main {
             return new ModelAndView(foodMap, "createsmoothie");
         }, new ThymeleafTemplateEngine());
 
-//        Spark.post("/deleteingredient", (req, res) -> {
-//            ingredientHandler.req.queryParams(queryParam)
-//
-//            res.redirect("/createsmoothie");
-//            return "";
-//        });
+//delete smoothie
+        Spark.get("/deletesmoothie/:id", (req, res) -> {
+//            foodHandler.deleteSmoothie(req.queryParams(""));
 
+            res.redirect("/");
+            return "";
+        });
+
+//add smoothie
+        Spark.post("/addsmoothie", (req, res) -> {
+//            foodHandler.addSmoothie(req.queryParams(""));
+
+            res.redirect("/");
+            return "";
+        });
+
+// delete an ingredient
+        Spark.post("/deleteingredient", (req, res) -> {
+//            ingredientHandler.addIngredient(req.queryParams(""));
+
+            res.redirect("/");
+            return "";
+        });
+
+// add an ingredient
+        Spark.post("/addingredient", (req, res) -> {
+//            ingredientHandler.addIngredient(req.queryParams(""));
+
+            res.redirect("/");
+            return "";
+        });
+
+// add an ingredient for a smoothie
+        Spark.post("/addIngredientForSmoothie/:id", (req, res) -> {
+//            foodtHandler.addIngredientForSmoothie(req.queryParams(""));
+
+            res.redirect("/");
+            return "";
+        });
     }
 
 }
