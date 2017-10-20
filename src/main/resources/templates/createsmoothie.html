@@ -1,4 +1,5 @@
-<html>
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
   <title>Smoothiet</title>
 </head>
@@ -7,16 +8,18 @@
   <h2>Smoothiet</h2>
 
   <ul>
-    <li><a href="2.html">Aurinkolasit</a> (<a href="2/poista">poista</a>)</li>
-    <li><a href="1.html">Mustikkaplorays</a> (<a href="1/poista">poista</a>)</li>
-  </ul>
+            <li th:each="food : ${foods}">
+                <span th:text="${food.name}">Task</span>              
+                    <a th:href="@{~/deletesmoothie/{id}(id=${food.id})}">poista</a>
+            </li>
+        </ul>
 
 
   <h4>Lisää uusi</h4>
   
-  <form method="POST" action="">
+  <form method="POST" action="/addsmoothie">
       Smoothien nimi:<br/>
-      <input type="text" name="aine"/><br/>
+      <input type="text" name="name"/><br/>
       <input type="submit" value="Lisää"/>
   </form>
 
@@ -25,15 +28,12 @@
   <form method="POST" action="">
       Smoothien nimi:<br/>
       <select name="smoothie">
-        <option name="2">Aurinkolasit</option>
-        <option name="1">Mustikkaplorays</option>
+        <option th:each="food : ${foods}" th:value="${food.id}" th:text="${food.name}">smoothie</option>
       </select>
       <br/>
       Lisättävä raaka-aine<br/>
       <select name="raakaAine">
-        <option name="1">Appelsiini</option>
-        <option name="2">Banaani</option>
-        <option name="...">...</option>
+          <option th:each="ingredient : ${ingredients}" th:value="${ingredient.id}" th:text="${ingredient.name}">ingredient</option>
       </select>
       <br/>
       Järjestys<br/>

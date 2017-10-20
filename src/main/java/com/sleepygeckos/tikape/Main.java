@@ -42,7 +42,6 @@ public class Main {
 //            res.redirect("/createsmoothie");
 //            return "";
 //        });
-
         Spark.get("/food/:id", (req, res) -> {
             HashMap recipes = new HashMap<>();
             recipes.put("food", foodHandler.getFood(Integer.parseInt(req
@@ -51,6 +50,46 @@ public class Main {
                     .parseInt(req.params(":id"))));
             return new ModelAndView(recipes, "food");
         }, new ThymeleafTemplateEngine());
+
+        //delete smoothie
+        Spark.get("/deletesmoothie/:id", (req, res) -> {
+//            foodHandler.deleteSmoothie(req.queryParams(""));
+
+            res.redirect("/");
+            return "";
+        });
+
+//add smoothie
+        Spark.post("/addsmoothie", (req, res) -> {
+//            foodHandler.addSmoothie(req.queryParams(""));
+
+            res.redirect("/");
+            return "";
+        });
+
+// delete an ingredient
+        Spark.post("/deleteingredient", (req, res) -> {
+//            ingredientHandler.addIngredient(req.queryParams(""));
+
+            res.redirect("/");
+            return "";
+        });
+
+// add an ingredient
+        Spark.post("/addingredient", (req, res) -> {
+//            ingredientHandler.addIngredient(req.queryParams(""));
+
+            res.redirect("/");
+            return "";
+        });
+
+// add an ingredient for a smoothie
+        Spark.post("/addIngredientForSmoothie/:id", (req, res) -> {
+//            foodtHandler.addIngredientForSmoothie(req.queryParams(""));
+
+            res.redirect("/");
+            return "";
+        });
 
     }
 
