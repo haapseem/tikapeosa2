@@ -71,7 +71,7 @@ public class DbHandler {
 
         statement.close();
         resultSet.close();
-        
+
         return foundItems;
     }
 
@@ -97,6 +97,74 @@ public class DbHandler {
         }
 
         return null;
+    }
+
+    //Adds a Food or Ingredient depending on given table parameter. The name
+    //parameter is the name of the food or ingredient, not a Food or Ingredient
+    //object, as we don't create objects when adding to the database.
+    public void addItem(String tableName, String itemName) throws SQLException {
+        if (tableName.equals("Food")) {
+            PreparedStatement addFood = connection.prepareStatement("INSERT INTO Food (name) VALUES (?)");
+            addFood.setString(1, itemName);
+            addFood.executeUpdate();
+
+            addFood.close();
+        }
+
+        if (tableName.equals("Ingredient")) {
+            PreparedStatement addIngredient = connection.prepareStatement("INSERT INTO Ingredient (name) VALUES (?)");
+            addIngredient.setString(1, itemName);
+            addIngredient.executeUpdate();
+
+            addIngredient.close();
+        }
+    }
+
+    public void addRecipeLineToFood(int foodId, RecipeLine recipeLine) throws SQLException {
+        PreparedStatement addFoodIngredient = connection.prepareStatement("INSERT INTO FoodIngredient (orderName, amount, recipe, ingredientId, foodId) VALUES (?, ?, ?, ?)");
+        //Variables named according to their column name in the database.
+        String orderName = recipeLine.getOrder();
+        String amount = recipeLine.getAmount();
+        String recipe = recipeLine.getText();
+        int ingredientId = recipeLine.getIngredient().getId();
+        
+        addFoodIngredient.setString(1, orderName);
+        addFoodIngredient.setString(2, amount);
+        addFoodIngredient.setString(3, recipe);
+        addFoodIngredient.setInt(4, ingredientId);
+        addFoodIngredient.setInt(5, foodId);
+        
+        addFoodIngredient.executeUpdate();
+        
+        addFoodIngredient.close();
+    }
+
+    //Removes a Food or Ingredient depending on the tableName parameter. Also
+    //removes the given item from the FoodIngredient table to keep db consistent.
+    public void removeItem(String tableName, int id) throws SQLException {
+        if (tableName.equals("Food")) {
+            PreparedStatement deleteFood = connection.prepareStatement("BEGIN TRANSACTION\n"
+                    + "DELETE * FROM Food WHERE id = ?;\n"
+                    + "DELETE * FROM FoodIngredient WHERE foodId = ?;\n"
+                    + "COMMIT");
+            deleteFood.setInt(1, id);
+            deleteFood.setInt(2, id);
+            deleteFood.executeUpdate();
+
+            deleteFood.close();
+        }
+
+        if (tableName.equals("Ingredient")) {
+            PreparedStatement deleteIngredient = connection.prepareStatement("BEGIN TRANSACTION\n"
+                    + "DELETE * FROM Ingredient WHERE id = ?;\n"
+                    + "DELETE * FROM FoodIngredient WHERE ingredientId = ?;\n"
+                    + "COMMIT");
+            deleteIngredient.setInt(1, id);
+            deleteIngredient.setInt(2, id);
+            deleteIngredient.executeUpdate();
+
+            deleteIngredient.close();
+        }
     }
 
 }
