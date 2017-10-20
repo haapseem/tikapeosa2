@@ -1,5 +1,6 @@
 package com.sleepygeckos.tikape;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Food extends Item {
@@ -8,6 +9,7 @@ public class Food extends Item {
 
     public Food(int id, String name) {
         super(id, name);
+        this.recipeLines = new ArrayList<>();
     }
 
     public void addRecipeLine(RecipeLine recipeLine) {
@@ -18,6 +20,10 @@ public class Food extends Item {
         for (RecipeLine recipeLine : recipeLinesToAdd) {
             this.recipeLines.add(recipeLine);
         }
+    }
+    
+    public List<RecipeLine> getRecipeLines(){
+        return recipeLines;
     }
 
     public void ClearRecipeLines() {

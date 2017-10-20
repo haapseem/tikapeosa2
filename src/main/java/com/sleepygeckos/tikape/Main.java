@@ -4,7 +4,6 @@ import com.sleepygeckos.tikape.database.DbHandler;
 import com.sleepygeckos.tikape.handlers.FoodHandler;
 import com.sleepygeckos.tikape.handlers.IngredientHandler;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import spark.ModelAndView;
 import spark.Spark;
@@ -16,6 +15,7 @@ public class Main {
         DbHandler dbhandler = new DbHandler();
         FoodHandler foodHandler = new FoodHandler(dbhandler);
         IngredientHandler ingredientHandler = new IngredientHandler(dbhandler);
+        foodHandler.generateRecipeLines();
 
         Spark.get("/", (req, res) -> {
             HashMap map = new HashMap<>();
@@ -42,6 +42,15 @@ public class Main {
 //            res.redirect("/createsmoothie");
 //            return "";
 //        });
+
+        Spark.get("/food/:id", (req, res) -> {
+            HashMap recipes = new HashMap<>();
+            recipes.put("food", foodHandler.getFood(Integer.parseInt(req
+                    .params(":id"))));
+            recipes.put("lines", foodHandler.getRecipeLines(Integer
+                    .parseInt(req.params(":id"))));
+            return new ModelAndView(recipes, "food");
+        }, new ThymeleafTemplateEngine());
 
     }
 
