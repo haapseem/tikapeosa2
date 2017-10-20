@@ -54,13 +54,13 @@ public class Main {
         //delete smoothie
         Spark.get("/deletesmoothie/:id", (req, res) -> {
             int index = Integer.parseInt(req.params(":id"));
-            try{
+            try {
                 dbhandler.removeItem("Food", index);
                 foodHandler.resetList();
                 ingredientHandler.resetList();
                 foodHandler.generateRecipeLines();
-                res.redirect("/");
-            }catch(Exception e) {
+                res.redirect("/createsmoothie");
+            } catch (Exception e) {
                 e.printStackTrace();
             }
             return "";
@@ -69,7 +69,6 @@ public class Main {
 //add smoothie
         Spark.post("/addsmoothie", (req, res) -> {
             foodHandler.addItem("Food", req.queryParams("name"));
-            
 
             res.redirect("/createsmoothie");
             return "";
@@ -78,16 +77,15 @@ public class Main {
 // delete an ingredient
         Spark.get("/deleteingredient/:id", (req, res) -> {
             int index = Integer.parseInt(req.params(":id"));
-            try{
+            try {
                 dbhandler.removeItem("Ingredient", index);
                 foodHandler.resetList();
                 ingredientHandler.resetList();
                 foodHandler.generateRecipeLines();
                 res.redirect("/ingredients");
-            }catch(Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
-            
 
             return "";
         });
@@ -107,10 +105,14 @@ public class Main {
             String a = req.queryParams("order");
             String b = req.queryParams("amount");
             String c = req.queryParams("recipe");
-            
+
             foodHandler.addRecipeLine(x, y, a, c, b);
-            
-            res.redirect("/");
+
+            foodHandler.resetList();
+            ingredientHandler.resetList();
+            foodHandler.generateRecipeLines();
+
+            res.redirect("/createsmoothie");
             return "";
         });
 
