@@ -2,10 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-  <title>Smoothiet</title>
+  <title>Foods & Drinks</title>
 </head>
 <body>
-  <h2>Smoothielista</h2>
+  <h2>Available recipes:</h2>
   
   <ul>
     <li th:each="food: ${foods}">
@@ -15,10 +15,10 @@
 
   <ul>
     <li>
-      <a href="createsmoothie">Luo uusi smoothie</a>
+      <a href="createsmoothie">Create a new recipe</a>
     </li>
     <li>
-      <a href="ingredients">Tarkastele ja lisää aineksia</a>
+      <a href="ingredients">Add or inspect ingredients</a>
     </li>
   </ul>
 </body>

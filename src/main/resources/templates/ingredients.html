@@ -1,29 +1,29 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
     <head>
-        <title>Raaka-aineet</title>
+        <title>Ingredients</title>
     </head>
     <body>
-        <h2>Raaka-aineet</h2>
+        <h2>Ingredients</h2>
 
         <ul>
             <li th:each="ingredient : ${ingredients}">
                 <span th:text="${ingredient.name}">Task</span>              
-                <a th:href="@{~/deleteingredient/{id}(id=${ingredient.id})}">poista</a>
+                <a th:href="@{~/deleteingredient/{id}(id=${ingredient.id})}">Remove</a>
             </li>
         </ul>
         
-        <h4>Lisää uusi raaka-aine</h4>
+        <h4>Add a new ingredient</h4>
 
         <form method="POST" action="/addingredient">
-            Raaka-aineen nimi:<br/>
+            Ingredient name:<br/>
             <input type="text" name="name"/><br/>
-            <input type="submit" value="Lisää"/>
+            <input type="submit" value="Add"/>
         </form>
 
         <ul>
             <li>
-                <a href="../">Smoothielistaukseen</a>
+                <a href="../">Return to food & drink list</a>
             </li>
         </ul>
     </body>

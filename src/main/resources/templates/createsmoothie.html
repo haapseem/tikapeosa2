@@ -1,53 +1,53 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>Smoothiet</title>
+  <title>Foods & drinks</title>
 </head>
 <body>
 
-  <h2>Smoothiet</h2>
+  <h2>Currently available</h2>
 
   <ul>
             <li th:each="food : ${foods}">
                 <span th:text="${food.name}">Task</span>              
-                    <a th:href="@{~/deletesmoothie/{id}(id=${food.id})}">poista</a>
+                    <a th:href="@{~/deletesmoothie/{id}(id=${food.id})}">Remove</a>
             </li>
         </ul>
 
 
-  <h4>Lisää uusi</h4>
+  <h4>Add a new food or drink</h4>
   
   <form method="POST" action="/addsmoothie">
-      Smoothien nimi:<br/>
+      Food/drink name:<br/>
       <input type="text" name="name"/><br/>
-      <input type="submit" value="Lisää"/>
+      <input type="submit" value="Add"/>
   </form>
 
-  <h4>Lisää raaka-aineita</h4>
+  <h4>Add ingredients to a recipe</h4>
 
   <form method="POST" action="/addIngredientForSmoothie">
-      Smoothien nimi:<br/>
+      Food/drink name:<br/>
       <select name="smoothie">
-        <option th:each="food : ${foods}" th:value="${food.id}" th:text="${food.name}">smoothie</option>
+        <option th:each="food : ${foods}" th:value="${food.id}" th:text="${food.name}">Food/drink</option>
       </select>
       <br/>
-      Lisättävä raaka-aine<br/>
+      Ingredient to be added:<br/>
       <select name="ingredient">
           <option th:each="ingredient : ${ingredients}" th:value="${ingredient.id}" th:text="${ingredient.name}">ingredient</option>
       </select>
       <br/>
-      Ordar<br/>
+      Order<br/>
       <input type="text" name="order"/><br/>
-      A mot<br/>
+      Amount<br/>
       <input type="text" name="amount"/><br/>
-      Receipt<br/>
+      Instructions<br/>
       <input type="text" name="recipe"/><br/>
-      <input type="submit" value="Lisää"/>
+      <input type="submit" value="Add"/>
   </form>
 
   <ul>
     <li>
-      <a href="../">Smoothielistaukseen</a>
+      <a href="../">Return to food & drink list</a>
     </li>
   </ul>
 </body>
