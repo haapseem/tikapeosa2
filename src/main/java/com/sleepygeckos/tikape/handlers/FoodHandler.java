@@ -67,8 +67,12 @@ public class FoodHandler extends ItemHandler {
     public void addRecipeLine(int foodId, int ingredientId, String order, String text, String amount) throws Exception {
         Ingredient ingredient = (Ingredient) (new IngredientHandler(super.getDh())).getItem(ingredientId);
         RecipeLine recipeLine = new RecipeLine(ingredient, order, amount, text);
-        
+        try{
         super.getDh().addRecipeLineToFood(foodId, recipeLine);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        this.generateRecipeLines();
     }
 
 }

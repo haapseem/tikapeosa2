@@ -121,7 +121,7 @@ public class DbHandler {
     }
 
     public void addRecipeLineToFood(int foodId, RecipeLine recipeLine) throws SQLException {
-        PreparedStatement addFoodIngredient = connection.prepareStatement("INSERT INTO FoodIngredient (orderName, amount, recipe, ingredientId, foodId) VALUES (?, ?, ?, ?)");
+        PreparedStatement addFoodIngredient = connection.prepareStatement("INSERT INTO FoodIngredient (orderName, amount, recipe, ingredientId, foodId) VALUES (?, ?, ?, ?, ?)");
         //Variables named according to their column name in the database.
         String orderName = recipeLine.getOrder();
         String amount = recipeLine.getAmount();
