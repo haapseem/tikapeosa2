@@ -24,7 +24,6 @@ public class Main {
         }, new ThymeleafTemplateEngine());
 
         Spark.get("/ingredients", (req, res) -> {
-            System.out.println("asd");
             HashMap ingredientMap = new HashMap<>();
             ingredientMap.put("ingredients", ingredientHandler.getItems());
             return new ModelAndView(ingredientMap, "ingredients");
@@ -33,6 +32,7 @@ public class Main {
         Spark.get("/createsmoothie", (req, res) -> {
             HashMap foodMap = new HashMap<>();
             foodMap.put("foods", foodHandler.getItems());
+            foodMap.put("ingredients", ingredientHandler.getItems());
             return new ModelAndView(foodMap, "createsmoothie");
         }, new ThymeleafTemplateEngine());
 

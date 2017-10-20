@@ -1,29 +1,30 @@
-<html>
-<head>
-  <title>Raaka-aineet</title>
-</head>
-<body>
-  <h2>Raaka-aineet</h2>
-  
-  <ul>
-    <li>Appelsiini <a href="1/poista">(poista)</a></li>
-    <li>Banaani <a href="2/poista">(poista)</a></li>
-    <li>Maito <a href="3/poista">(poista)</a></li>
-    <li>Mandariini <a href="4/poista">(poista)</a></li>
-    <li>Mansikka <a href="5/poista">(poista)</a></li>
-  </ul>
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Raaka-aineet</title>
+    </head>
+    <body>
+        <h2>Raaka-aineet</h2>
 
-  <h4>Lisää uusi raaka-aine</h4>
-  
-  <form method="POST" action="/addsmoothie">
-      Raaka-aineen nimi:<br/>
-      <input type="text" name="aine"/><br/>
-      <input type="submit" value="Lisää"/>
-  </form>
+        <ul>
+            <li th:each="ingredient : ${ingredients}">
+                <span th:text="${ingredient.name}">Task</span>              
+                <a th:href="@{~/deleteingredient/{id}(id=${ingredient.id})}">poista</a>
+            </li>
+        </ul>
+        
+        <h4>Lisää uusi raaka-aine</h4>
 
-  <ul>
-    <li>
-      <a href="../">Smoothielistaukseen</a>
-    </li>
-  </ul>
+        <form method="POST" action="/addsmoothie">
+            Raaka-aineen nimi:<br/>
+            <input type="text" name="aine"/><br/>
+            <input type="submit" value="Lisää"/>
+        </form>
+
+        <ul>
+            <li>
+                <a href="../">Smoothielistaukseen</a>
+            </li>
+        </ul>
+    </body>
 </html>
