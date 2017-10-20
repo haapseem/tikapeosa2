@@ -36,6 +36,13 @@ public class Main {
             return new ModelAndView(foodMap, "createsmoothie");
         }, new ThymeleafTemplateEngine());
 
+//        Spark.post("/deleteingredient", (req, res) -> {
+//            ingredientHandler.req.queryParams(queryParam)
+//
+//            res.redirect("/createsmoothie");
+//            return "";
+//        });
+
     }
 
 }
