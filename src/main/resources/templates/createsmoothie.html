@@ -25,7 +25,7 @@
 
   <h4>Lisää raaka-aineita</h4>
 
-  <form method="POST" action="/addIngredientForSmoothie/:id">
+  <form method="POST" action="/addIngredientForSmoothie">
       Smoothien nimi:<br/>
       <select name="smoothie">
         <option th:each="food : ${foods}" th:value="${food.id}" th:text="${food.name}">smoothie</option>
@@ -36,12 +36,12 @@
           <option th:each="ingredient : ${ingredients}" th:value="${ingredient.id}" th:text="${ingredient.name}">ingredient</option>
       </select>
       <br/>
-      Järjestys<br/>
-      <input type="text"/><br/>
-      Määrä<br/>
-      <input type="text"/><br/>
-      Ohje<br/>
-      <input type="text"/><br/>
+      Ordar<br/>
+      <input type="text" name="order"/><br/>
+      A mot<br/>
+      <input type="text" name="amount"/><br/>
+      Receipt<br/>
+      <input type="text" name="recipe"/><br/>
       <input type="submit" value="Lisää"/>
   </form>
 
