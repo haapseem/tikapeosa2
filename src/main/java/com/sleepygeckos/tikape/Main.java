@@ -16,6 +16,7 @@ public class Main {
         DbHandler dbhandler = new DbHandler();
         FoodHandler foodHandler = new FoodHandler(dbhandler);
         IngredientHandler ingredientHandler = new IngredientHandler(dbhandler);
+        foodHandler.generateRecipeLines();
 
         Spark.get("/", (req, res) -> {
             HashMap map = new HashMap<>();
@@ -34,6 +35,15 @@ public class Main {
             HashMap foodMap = new HashMap<>();
             foodMap.put("foods", foodHandler.getItems());
             return new ModelAndView(foodMap, "createsmoothie");
+        }, new ThymeleafTemplateEngine());
+        
+        Spark.get("/food/:id", (req, res) -> {
+            HashMap recipes = new HashMap<>();
+            recipes.put("food", foodHandler.getFood(Integer.parseInt(req
+                    .params(":id"))));
+            recipes.put("lines", foodHandler.getRecipeLines(Integer
+                    .parseInt(req.params(":id"))));
+            return new ModelAndView(recipes, "food");
         }, new ThymeleafTemplateEngine());
 
     }

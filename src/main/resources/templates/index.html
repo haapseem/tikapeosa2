@@ -9,7 +9,7 @@
   
   <ul>
     <li th:each="food: ${foods}">
-        <span th:text="${food.name}">1</span>
+        <a th:href="@{~/food/{id}(id=${food.id})}" th:text="${food.name}">1</a>
     </li>
   </ul>
 
