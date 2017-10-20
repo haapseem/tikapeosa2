@@ -53,15 +53,23 @@ public class Main {
 
         //delete smoothie
         Spark.get("/deletesmoothie/:id", (req, res) -> {
-//            foodHandler.deleteSmoothie(req.queryParams(""));
-
-            res.redirect("/");
+            int index = Integer.parseInt(req.params(":id"));
+            try{
+                dbhandler.removeItem("Food", index);
+                foodHandler.resetList();
+                ingredientHandler.resetList();
+                foodHandler.generateRecipeLines();
+                res.redirect("/");
+            }catch(Exception e) {
+                e.printStackTrace();
+            }
             return "";
         });
 
 //add smoothie
         Spark.post("/addsmoothie", (req, res) -> {
             foodHandler.addItem("Food", req.queryParams("name"));
+            
 
             res.redirect("/createsmoothie");
             return "";
@@ -71,11 +79,16 @@ public class Main {
         Spark.get("/deleteingredient/:id", (req, res) -> {
             int index = Integer.parseInt(req.params(":id"));
             try{
-            dbhandler.removeItem("Ingredient", index);
-            res.redirect("/ingredients");
+                dbhandler.removeItem("Ingredient", index);
+                foodHandler.resetList();
+                ingredientHandler.resetList();
+                foodHandler.generateRecipeLines();
+                res.redirect("/ingredients");
             }catch(Exception e) {
                 e.printStackTrace();
             }
+            
+
             return "";
         });
 

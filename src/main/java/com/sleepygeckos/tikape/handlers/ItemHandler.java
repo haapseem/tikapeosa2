@@ -17,10 +17,16 @@ public abstract class ItemHandler {
     
     private List<Item> items;
     private DbHandler dh;
+    private String tableName;
     
     public ItemHandler(String tableName, DbHandler dh) throws Exception{
         this.dh = dh;
         this.items = dh.findAllItems(tableName);
+        this.tableName = tableName;
+    }
+    
+    public void resetList() throws Exception{
+        this.items = dh.findAllItems(this.tableName);
     }
 
     public List<Item> getItems() {
