@@ -24,6 +24,7 @@
 │   │   └── resources
 │   │       └── templates
 │   │           ├── createsmoothie.html
+│   │           ├── food.html
 │   │           ├── index.html
 │   │           ├── ingredients.html
 │   │           └── smoothie.html
@@ -47,6 +48,7 @@
     │   │           └── RecipeLine.class
     │   └── templates
     │       ├── createsmoothie.html
+    │       ├── food.html
     │       ├── index.html
     │       ├── ingredients.html
     │       └── smoothie.html
@@ -54,4 +56,4 @@
     │   └── annotations
     └── test-classes
 
-23 directories, 31 files
+23 directories, 33 files
