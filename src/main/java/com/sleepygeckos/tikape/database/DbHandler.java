@@ -144,29 +144,31 @@ public class DbHandler {
     public void removeItem(String tableName, int id) throws SQLException {
         if (tableName.equals("Food")) {
 
-            PreparedStatement deleteFood = connection.prepareStatement("BEGIN TRANSACTION\n"
-                    + "DELETE FROM Food WHERE id = ?;\n"
-                    + "DELETE FROM FoodIngredient WHERE foodId = ?;\n"
-                    + "COMMIT");
 
-            deleteFood.setInt(1, id);
-            deleteFood.setInt(2, id);
-            deleteFood.executeUpdate();
+            PreparedStatement deleteIngredient = connection.prepareStatement("DELETE FROM Food WHERE id = ?;");
+            deleteIngredient.setInt(1, id);
+            deleteIngredient.executeUpdate();
+            
+            deleteIngredient = connection.prepareStatement("DELETE FROM FoodIngredient WHERE foodId = ?");
+            deleteIngredient.setInt(1, id);
+            deleteIngredient.executeUpdate();
 
-            deleteFood.close();
+            deleteIngredient.close();
         }
 
         if (tableName.equals("Ingredient")) {
 
-            PreparedStatement deleteIngredient = connection.prepareStatement("BEGIN TRANSACTION\n"
-                    + "DELETE FROM Ingredient WHERE id = ?;\n"
-                    + "DELETE FROM FoodIngredient WHERE ingredientId = ?;\n"
-                    + "COMMIT");
+            PreparedStatement deleteIngredient = connection.prepareStatement("DELETE FROM Ingredient WHERE id = ?;");
             deleteIngredient.setInt(1, id);
-            deleteIngredient.setInt(2, id);
             deleteIngredient.executeUpdate();
-
+            
+            deleteIngredient = connection.prepareStatement("DELETE FROM FoodIngredient WHERE ingredientId = ?");
+            deleteIngredient.setInt(1, id);
+            deleteIngredient.executeUpdate();
+            
             deleteIngredient.close();
+            
+            
 
 
 
