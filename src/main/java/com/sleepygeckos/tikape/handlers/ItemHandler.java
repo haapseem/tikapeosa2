@@ -31,5 +31,10 @@ public abstract class ItemHandler {
         this.items = items;
     }
     
+    public void addItem(String tableName, String name) throws Exception{
+        dh.addItem(tableName, name);
+        items = dh.findAllItems(tableName);
+    }
+    
     
 }

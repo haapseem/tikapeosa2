@@ -61,7 +61,7 @@ public class Main {
 
 //add smoothie
         Spark.post("/addsmoothie", (req, res) -> {
-//            foodHandler.addSmoothie(req.queryParams(""));
+            foodHandler.addItem("Food", req.queryParams("name"));
 
             res.redirect("/");
             return "";
@@ -69,7 +69,6 @@ public class Main {
 
 // delete an ingredient
         Spark.post("/deleteingredient", (req, res) -> {
-//            ingredientHandler.addIngredient(req.queryParams(""));
 
             res.redirect("/");
             return "";
@@ -77,7 +76,7 @@ public class Main {
 
 // add an ingredient
         Spark.post("/addingredient", (req, res) -> {
-//            ingredientHandler.addIngredient(req.queryParams(""));
+            ingredientHandler.addItem("Ingredient", req.queryParams("name"));
 
             res.redirect("/");
             return "";
