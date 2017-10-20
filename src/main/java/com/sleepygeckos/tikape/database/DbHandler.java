@@ -109,7 +109,7 @@ public class DbHandler {
             addFood.executeUpdate();
 
             addFood.close();
-}
+        }
 
         if (tableName.equals("Ingredient")) {
             PreparedStatement addIngredient = connection.prepareStatement("INSERT INTO Ingredient (name) VALUES (?)");
@@ -127,15 +127,15 @@ public class DbHandler {
         String amount = recipeLine.getAmount();
         String recipe = recipeLine.getText();
         int ingredientId = recipeLine.getIngredient().getId();
-        
+
         addFoodIngredient.setString(1, orderName);
         addFoodIngredient.setString(2, amount);
         addFoodIngredient.setString(3, recipe);
         addFoodIngredient.setInt(4, ingredientId);
         addFoodIngredient.setInt(5, foodId);
-        
+
         addFoodIngredient.executeUpdate();
-        
+
         addFoodIngredient.close();
     }
 
@@ -143,10 +143,12 @@ public class DbHandler {
     //removes the given item from the FoodIngredient table to keep db consistent.
     public void removeItem(String tableName, int id) throws SQLException {
         if (tableName.equals("Food")) {
+
             PreparedStatement deleteFood = connection.prepareStatement("BEGIN TRANSACTION\n"
                     + "DELETE FROM Food WHERE id = ?;\n"
                     + "DELETE FROM FoodIngredient WHERE foodId = ?;\n"
                     + "COMMIT");
+
             deleteFood.setInt(1, id);
             deleteFood.setInt(2, id);
             deleteFood.executeUpdate();
@@ -155,6 +157,7 @@ public class DbHandler {
         }
 
         if (tableName.equals("Ingredient")) {
+
             PreparedStatement deleteIngredient = connection.prepareStatement("BEGIN TRANSACTION\n"
                     + "DELETE FROM Ingredient WHERE id = ?;\n"
                     + "DELETE FROM FoodIngredient WHERE ingredientId = ?;\n"
@@ -164,7 +167,9 @@ public class DbHandler {
             deleteIngredient.executeUpdate();
 
             deleteIngredient.close();
+
+
+
         }
     }
-
 }

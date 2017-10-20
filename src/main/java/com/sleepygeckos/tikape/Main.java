@@ -63,14 +63,19 @@ public class Main {
         Spark.post("/addsmoothie", (req, res) -> {
             foodHandler.addItem("Food", req.queryParams("name"));
 
-            res.redirect("/");
+            res.redirect("/createsmoothie");
             return "";
         });
 
 // delete an ingredient
-        Spark.post("/deleteingredient", (req, res) -> {
-
-            res.redirect("/");
+        Spark.get("/deleteingredient/:id", (req, res) -> {
+            int index = Integer.parseInt(req.params(":id"));
+            try{
+            dbhandler.removeItem("Ingredient", index);
+            res.redirect("/ingredients");
+            }catch(Exception e) {
+                e.printStackTrace();
+            }
             return "";
         });
 
@@ -78,7 +83,7 @@ public class Main {
         Spark.post("/addingredient", (req, res) -> {
             ingredientHandler.addItem("Ingredient", req.queryParams("name"));
 
-            res.redirect("/");
+            res.redirect("/ingredients");
             return "";
         });
 
