@@ -144,8 +144,8 @@ public class DbHandler {
     public void removeItem(String tableName, int id) throws SQLException {
         if (tableName.equals("Food")) {
             PreparedStatement deleteFood = connection.prepareStatement("BEGIN TRANSACTION\n"
-                    + "DELETE * FROM Food WHERE id = ?;\n"
-                    + "DELETE * FROM FoodIngredient WHERE foodId = ?;\n"
+                    + "DELETE FROM Food WHERE id = ?;\n"
+                    + "DELETE FROM FoodIngredient WHERE foodId = ?;\n"
                     + "COMMIT");
             deleteFood.setInt(1, id);
             deleteFood.setInt(2, id);
@@ -156,8 +156,8 @@ public class DbHandler {
 
         if (tableName.equals("Ingredient")) {
             PreparedStatement deleteIngredient = connection.prepareStatement("BEGIN TRANSACTION\n"
-                    + "DELETE * FROM Ingredient WHERE id = ?;\n"
-                    + "DELETE * FROM FoodIngredient WHERE ingredientId = ?;\n"
+                    + "DELETE FROM Ingredient WHERE id = ?;\n"
+                    + "DELETE FROM FoodIngredient WHERE ingredientId = ?;\n"
                     + "COMMIT");
             deleteIngredient.setInt(1, id);
             deleteIngredient.setInt(2, id);
